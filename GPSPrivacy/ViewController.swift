@@ -36,12 +36,14 @@ class ViewController: UIViewController {
         checkDeviceLocationAuthorization()
         
         for anotation in TheaterList.mapAnnotations {
-            MapAssistant.setAnnotation(mapView: mapView, latitude: anotation.latitude, longitude: anotation.longitude)
+            print("🌈🌈🌈🌈🌈", anotation.type)
+            MapAssistant.setAnnotation(mapView: mapView, title: anotation.type, latitude: anotation.latitude, longitude: anotation.longitude)
         }
         
     }
     
     @IBAction func pricyCheckButton(_ sender: UIButton) {
+        checkDeviceLocationAuthorization()
     }
 
     @objc func setRightButton() {
@@ -52,7 +54,9 @@ class ViewController: UIViewController {
             // 어노테이션들
             for test in TheaterList.mapAnnotations {
                 switch string {
-                case TheaterList.all: MapAssistant.setAnnotation(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                case TheaterList.all:
+                    print("🌈🌈🌈🌈🌈", test.type)
+                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.type ,latitude: test.latitude, longitude: test.longitude)
                     
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
@@ -61,7 +65,7 @@ class ViewController: UIViewController {
                 case test.type :
                     print(test)
                     // 와 진짜 된돵 ㅠㅠㅠㅠㅠ
-                    MapAssistant.setAnnotation(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.type, latitude: test.latitude, longitude: test.longitude)
                     
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
@@ -143,7 +147,7 @@ extension ViewController {
             for item in TheaterList.mapAnnotations {
                 let latitude = item.latitude
                 let longitude = item.longitude
-                MapAssistant.setAnnotation(mapView: mapView, latitude: latitude, longitude: longitude)
+                MapAssistant.setAnnotation(mapView: mapView, title:item.type, latitude: latitude, longitude: longitude)
             }
             
             

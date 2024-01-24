@@ -42,12 +42,12 @@ enum MapAssistant {
         mapView.addAnnotation(anotation)
     }
     
-    static func setAnnotation(mapView: MKMapView, latitude : Double, longitude : Double) {
+    static func setAnnotation(mapView: MKMapView,title: String ,latitude : Double, longitude : Double) {
         let l2d = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = l2d
-        
+        annotation.title = title
         mapView.addAnnotation(annotation)
         
     }
