@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
         locationManager.delegate = self
         
+        mapView.delegate = self
         
         // 만약 뷰컨트롤러가 네비게이션이나, 탭바 컨트롤러가 달려있을 경우에 안나오게 되는데 두번 호출되도 좋으니
         // 안전하게 여기에 추가하게 된다.
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
         
         for anotation in TheaterList.mapAnnotations {
             print("🌈🌈🌈🌈🌈", anotation.type)
-            MapAssistant.setAnnotation(mapView: mapView, title: anotation.type, latitude: anotation.latitude, longitude: anotation.longitude)
+            MapAssistant.setAnnotation(mapView: mapView, title: anotation.location, latitude: anotation.latitude, longitude: anotation.longitude)
         }
         
     }
@@ -55,17 +56,18 @@ class ViewController: UIViewController {
             for test in TheaterList.mapAnnotations {
                 switch string {
                 case TheaterList.all:
-                    print("🌈🌈🌈🌈🌈", test.type)
-                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.type ,latitude: test.latitude, longitude: test.longitude)
+                    print("🌈🌈🌈🌈🌈", test.location)
+                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.location ,latitude: test.latitude, longitude: test.longitude)
                     
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
                         self.changeLocation = true
                     }
                 case test.type :
-                    print(test)
+                    // print(test)
                     // 와 진짜 된돵 ㅠㅠㅠㅠㅠ
-                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.type, latitude: test.latitude, longitude: test.longitude)
+                    print("🌈🌈🌈🌈🌈", test.location)
+                    MapAssistant.setAnnotation(mapView: self.mapView,title: test.location, latitude: test.latitude, longitude: test.longitude)
                     
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
@@ -256,7 +258,11 @@ extension ViewController {
 }
 
 
-extension ViewController {
+extension ViewController: MKMapViewDelegate {
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        
+    }
     
 }

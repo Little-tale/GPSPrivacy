@@ -33,7 +33,7 @@ enum MapAssistant {
         
         let cl2d = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
-        let region = MKCoordinateRegion(center: cl2d, latitudinalMeters: 400, longitudinalMeters: 400)
+        let region = MKCoordinateRegion(center: cl2d, latitudinalMeters: 600, longitudinalMeters: 600)
         
         mapView.setRegion(region, animated: true)
         
@@ -43,13 +43,23 @@ enum MapAssistant {
     }
     
     static func setAnnotation(mapView: MKMapView,title: String ,latitude : Double, longitude : Double) {
+        
         let l2d = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
         let annotation = MKPointAnnotation()
+        
+        
         annotation.coordinate = l2d
         annotation.title = title
+        
+        print("📳📳📳📳📳📳📳", annotation)
         mapView.addAnnotation(annotation)
         
     }
+    
+    
+//    enum setTheater: String ca {
+//        case mega :
+//    }
     
 }
