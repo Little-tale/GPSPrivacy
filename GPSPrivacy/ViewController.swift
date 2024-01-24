@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
+    var changeLocation = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "영화관"
@@ -43,7 +46,33 @@ class ViewController: UIViewController {
 
     @objc func setRightButton() {
         let alert = AlertManager.AllTheater.showActionSheet(title: "영화를 선택하세요", message: "") {
-            string in
+            string in // 버튼 이름
+            
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            // 어노테이션들
+            for test in TheaterList.mapAnnotations {
+                switch string {
+                case TheaterList.all: MapAssistant.setAnnotation(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                    
+                    if !self.changeLocation {
+                        MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                        self.changeLocation = true
+                    }
+                case test.type :
+                    print(test)
+                    // 와 진짜 된돵 ㅠㅠㅠㅠㅠ
+                    MapAssistant.setAnnotation(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                    
+                    if !self.changeLocation {
+                        MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
+                        self.changeLocation = true
+                    }
+                default:
+                    print(":bye")
+                    
+                }
+                self.changeLocation = false
+            }
             
         }
         present(alert, animated: true)

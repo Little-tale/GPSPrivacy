@@ -16,6 +16,8 @@ struct Theater {
 
 
 struct TheaterList {
+    static let all = "All"
+    
     static var mapAnnotations: [Theater] = [
         Theater(type: "롯데시네마", location: "롯데시네마 서울대입구", latitude: 37.4824761978647, longitude: 126.9521680487202),
         Theater(type: "롯데시네마", location: "롯데시네마 가산디지털", latitude: 37.47947929602294, longitude: 126.88891083192269),
