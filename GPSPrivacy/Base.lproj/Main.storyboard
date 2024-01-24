@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bM2-bs-39D">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -18,26 +18,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofJ-yg-gmu">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="669"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kC-Zn-Zvz">
+                                <rect key="frame" x="0.0" y="772" width="393" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="Ttc-is-gCV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="pricyCheckButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qvz-z3-JSk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2kC-Zn-Zvz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7SX-n3-0jr"/>
                             <constraint firstItem="ofJ-yg-gmu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9Hg-BI-gk8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ofJ-yg-gmu" secondAttribute="bottom" id="HS6-Ug-gVt"/>
+                            <constraint firstItem="2kC-Zn-Zvz" firstAttribute="top" secondItem="ofJ-yg-gmu" secondAttribute="bottom" id="Yuv-Nx-6h1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2kC-Zn-Zvz" secondAttribute="trailing" id="dOd-BW-UOy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2kC-Zn-Zvz" secondAttribute="bottom" id="dtb-Zv-cK1"/>
                             <constraint firstItem="ofJ-yg-gmu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="t9e-oI-inM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ofJ-yg-gmu" secondAttribute="trailing" id="xDQ-pB-zHz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2iO-R6-Uz2"/>
                     <connections>
                         <outlet property="mapView" destination="ofJ-yg-gmu" id="bAB-8X-R91"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-129" y="-22"/>
+            <point key="canvasLocation" x="797.70992366412213" y="-22.535211267605636"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Tgx-Kc-Z93">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bM2-bs-39D" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VeV-nK-Cfh">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="UPl-lE-vdJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pg5-0M-86R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129.00763358778624" y="-22.535211267605636"/>
         </scene>
     </scenes>
     <resources>

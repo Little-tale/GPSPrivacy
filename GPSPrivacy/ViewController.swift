@@ -1,10 +1,15 @@
-//
-//  ViewController.swift
-//  GPSPrivacy
-//
-//  Created by Jae hyung Kim on 1/24/24.
-//
-
+/*
+ 1. 사용자의 현재 위치를 가져오는 로직을 구현
+    사용자가 위치 권한을 허용할 경우 맵뷰 중싱ㅁ을 사용자의 현재 위치로 설정한다.
+    만약, 1.2 거부시 청취학 도봉캠 맵뷰 중심이 되도록 설정합니다.
+ 2. 위치 라는 버튼을 만들어 위치 권한을 거부한 경우, 알렛을 띄어주어 IOS 설정 화면으로 유도하여 주세여
+ 
+ 3. 주변 영화관을 맵뷰 어노테이션으로 표시합니다.
+ 
+ 4. 최초 뷰 컨트롤러 진입시에는 전체 어노테이션을 다 보여주세요
+    // 롯데시나마/ 메가박스 / CGV / 전체 보기로 액션시트를 만듭니다.
+ 
+ */
 import UIKit
 import MapKit
 import CoreLocation // IOS 아이폰 기기의 GPS 를 받아올수 있는 프레임 워크
@@ -16,23 +21,39 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "영화관"
+        let rightBarButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(setRightButton))
         
+        navigationItem.rightBarButtonItem = rightBarButton
         locationManager.delegate = self
-        // 잠깐 테스트를 위해 여기다가
+        
+        
+        // 만약 뷰컨트롤러가 네비게이션이나, 탭바 컨트롤러가 달려있을 경우에 안나오게 되는데 두번 호출되도 좋으니
+        // 안전하게 여기에 추가하게 된다.
         checkDeviceLocationAuthorization()
         
+        for anotation in TheaterList.mapAnnotations {
+            MapAssistant.setAnnotation(mapView: mapView, latitude: anotation.latitude, longitude: anotation.longitude)
+        }
         
     }
     
+    @IBAction func pricyCheckButton(_ sender: UIButton) {
+    }
 
+    @objc func setRightButton() {
+        let alert = AlertManager.AllTheater.showActionSheet(title: "영화를 선택하세요", message: "") {
+            string in
+            
+        }
+        present(alert, animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        MapAssistant.setRegion(mapView: mapView, latitude: MapAssistant.startResion[0], longitude: MapAssistant.startResion[1])
+    }
+    
 }
-//MARK: -> 1. 내가 왜 정보가 필요하냐
-// 2. 너의 디바이스가 위치를 사용하냐
-// 3. 너의 깐 내 앱이 위치 권한을 주었느냐 ?
-// 4.
-
-
-
 
 // MARK: - 디바이스 위치서비스 활성화 여부 확인
 extension ViewController {
@@ -90,8 +111,17 @@ extension ViewController {
             // 2. 이정도로 추적할 거니 허락해 달라고 요청한다.
             locationManager.requestWhenInUseAuthorization()
             
+            for item in TheaterList.mapAnnotations {
+                let latitude = item.latitude
+                let longitude = item.longitude
+                MapAssistant.setAnnotation(mapView: mapView, latitude: latitude, longitude: longitude)
+            }
+            
+            
         case .denied: // 거부 하였거나 후에 거부 되었을때
             // 이때는 설정으로 유인해야함
+            MapAssistant.focusRegion(mapView: mapView, latitude: MapAssistant.defaultRegion[0], longitude: MapAssistant.defaultRegion[1])
+            
             goSetting()
         case .authorizedAlways: // 항상 허용일때
             // 이때는 위치 정보를 불러와야함
@@ -184,8 +214,16 @@ extension ViewController {
     func setRegion(location : CLLocationCoordinate2D ) {
         // 위치 저장하하기
         // MKCoordinateRegion
-        let region = MKCoordinateRegion(center: location, latitudinalMeters: 400, longitudinalMeters: 400)
+        let region = MKCoordinateRegion(center: location, latitudinalMeters: 4000, longitudinalMeters: 4000)
         
         mapView.setRegion(region, animated: true)
+        
+        
     }
+}
+
+
+extension ViewController {
+    
+    
 }
