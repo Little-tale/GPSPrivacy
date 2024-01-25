@@ -16,6 +16,7 @@
 		7B673C452B60ED92001F6E0D /* TheatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B673C442B60ED92001F6E0D /* TheatherManager.swift */; };
 		7B673C472B60F123001F6E0D /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B673C462B60F123001F6E0D /* AlertManager.swift */; };
 		7B673C492B60FF44001F6E0D /* MapAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B673C482B60FF44001F6E0D /* MapAssistant.swift */; };
+		7B7E0D732B613C4D008D79B9 /* configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7E0D722B613C4D008D79B9 /* configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7B673C442B60ED92001F6E0D /* TheatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheatherManager.swift; sourceTree = "<group>"; };
 		7B673C462B60F123001F6E0D /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		7B673C482B60FF44001F6E0D /* MapAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAssistant.swift; sourceTree = "<group>"; };
+		7B7E0D722B613C4D008D79B9 /* configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				7B673C442B60ED92001F6E0D /* TheatherManager.swift */,
 				7B673C462B60F123001F6E0D /* AlertManager.swift */,
 				7B673C482B60FF44001F6E0D /* MapAssistant.swift */,
+				7B7E0D722B613C4D008D79B9 /* configuration.swift */,
 			);
 			path = GPSPrivacy;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B7E0D732B613C4D008D79B9 /* configuration.swift in Sources */,
 				7B673C452B60ED92001F6E0D /* TheatherManager.swift in Sources */,
 				7B673C352B60C292001F6E0D /* ViewController.swift in Sources */,
 				7B673C472B60F123001F6E0D /* AlertManager.swift in Sources */,

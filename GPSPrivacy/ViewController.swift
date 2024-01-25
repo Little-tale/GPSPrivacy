@@ -16,15 +16,27 @@ import CoreLocation // IOS 아이폰 기기의 GPS 를 받아올수 있는 프�
 
 class ViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var Button: UIButton!
     
     let locationManager = CLLocationManager()
+    var annotationList = [MKPointAnnotation] ()
+    var userLocation = CLLocationCoordinate2D()
     
     var changeLocation = false
-    
+    var firstLocatuon = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "영화관"
+        
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .systemGray2
+        config.baseForegroundColor = .white
+        config.title = "위치"
+        config.cornerStyle = .large
+        Button.configuration = config
+        
+        
         let rightBarButton = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(setRightButton))
         
         navigationItem.rightBarButtonItem = rightBarButton
@@ -40,6 +52,8 @@ class ViewController: UIViewController {
             print("🌈🌈🌈🌈🌈", anotation.type)
             MapAssistant.setAnnotation(mapView: mapView, title: anotation.location, latitude: anotation.latitude, longitude: anotation.longitude)
         }
+        // 사용자 위치 볼수있게해주는 것
+        //
         
     }
     
@@ -52,12 +66,15 @@ class ViewController: UIViewController {
             string in // 버튼 이름
             
             self.mapView.removeAnnotations(self.mapView.annotations)
+            self.annotationList.removeAll()
+            
             // 어노테이션들
             for test in TheaterList.mapAnnotations {
                 switch string {
                 case TheaterList.all:
-                    print("🌈🌈🌈🌈🌈", test.location)
+    
                     MapAssistant.setAnnotation(mapView: self.mapView,title: test.location ,latitude: test.latitude, longitude: test.longitude)
+                    self.annotationList.append(MapAssistant.getAnnotation(title: test.location, latitude: test.latitude, longitude: test.longitude))
                     
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
@@ -66,27 +83,32 @@ class ViewController: UIViewController {
                 case test.type :
                     // print(test)
                     // 와 진짜 된돵 ㅠㅠㅠㅠㅠ
-                    print("🌈🌈🌈🌈🌈", test.location)
                     MapAssistant.setAnnotation(mapView: self.mapView,title: test.location, latitude: test.latitude, longitude: test.longitude)
-                    
+                    self.annotationList.append(MapAssistant.getAnnotation(title: test.location, latitude: test.latitude, longitude: test.longitude))
                     if !self.changeLocation {
                         MapAssistant.setRegion(mapView: self.mapView, latitude: test.latitude, longitude: test.longitude)
                         self.changeLocation = true
                     }
+
+                    
                 default:
-                    print(":bye")
+                    print("👆👆👆👆👆👆",test.location)
                     
                 }
+                
                 self.changeLocation = false
+                
             }
-            
+    
         }
         present(alert, animated: true)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         MapAssistant.setRegion(mapView: mapView, latitude: MapAssistant.startResion[0], longitude: MapAssistant.startResion[1])
     }
+    
+    
     
 }
 
@@ -115,7 +137,6 @@ extension ViewController {
                 
                 // 받은 권한 상태값을 분기 하기 위해 넘깁니다.
                 DispatchQueue.main.async {
-                    
                     self.checkUserLocationAuthorization(authorizationStatus: authorization)
                     
                 }
@@ -161,10 +182,14 @@ extension ViewController {
         case .authorizedAlways: // 항상 허용일때
             // 이때는 위치 정보를 불러와야함
             // 위치정보 가져와 즉 시작을 해주자
+            mapView.showsUserLocation = true
             locationManager.startUpdatingLocation()
+            
         case .authorizedWhenInUse: // 사용할 때만일때,
             // 이때도 위치 정보를 불러야함
+            mapView.showsUserLocation = true
             locationManager.startUpdatingLocation()
+            
        default:
             print(fatalError())
         }
@@ -223,9 +248,17 @@ extension ViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             return
         }
+        
+//        if firstLocatuon {
+//            setRegion(location: location)
+//            firstLocatuon = false
+//        }
+        userLocation = location
         //dump(location)
         setRegion(location: location)
+        mapView.showsUserLocation = true
         
+        locationManager.stopUpdatingLocation()
         
     }
     
@@ -241,6 +274,8 @@ extension ViewController: CLLocationManagerDelegate {
         // 변경되었더라도 다시 했을수도 있으니 체크하는 시점으로 보낸다.
         checkDeviceLocationAuthorization()
     }
+    
+    
     
 }
 
@@ -264,5 +299,25 @@ extension ViewController: MKMapViewDelegate {
         
         
     }
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        
+    }
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        // mapView.reloadInputViews()
+       
+    }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+       
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+       
+    }
+    func mapView(_ mapView: MKMapView, didChange mode: MKUserTrackingMode, animated: Bool) {
+        
+        
+    }
+    
     
 }

@@ -7,7 +7,8 @@
 
 import UIKit
 
-enum AlertManager {
+enum AlertManager {// 탈출 -> hi (String) -> () !
+    
     enum AllTheater {
         static func showActionSheet(title: String, message: String, alertAction: @escaping(String) -> ()) -> UIAlertController {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
@@ -19,10 +20,13 @@ enum AlertManager {
                 let alertAction = UIAlertAction(title: theather, style: .default ) { action in
                     
                     print(action)
+                    
                     alertAction(theather)
                     
                 }
+                
                 alert.addAction(alertAction)
+                
             }
             
             let cancle = UIAlertAction(title: "취소", style: .cancel)

@@ -47,6 +47,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2iO-R6-Uz2"/>
                     <connections>
+                        <outlet property="Button" destination="2kC-Zn-Zvz" id="eZq-Hm-jtY"/>
                         <outlet property="mapView" destination="ofJ-yg-gmu" id="bAB-8X-R91"/>
                     </connections>
                 </viewController>
